@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-navy text-paper font-body;
+    -webkit-font-smoothing: antialiased;
+  }
+  * { @apply box-border; }
+}
+
+@layer components {
+  .card        { @apply bg-paper text-ink rounded-sm shadow-card p-5; }
+  .card-navy   { @apply bg-wire-soft text-paper border border-wire rounded-sm p-5; }
+  .btn         { @apply inline-flex items-center gap-2 px-4 py-2 rounded-md border border-wire bg-wire-soft text-paper text-sm cursor-pointer transition-all hover:border-verde; }
+  .btn-primary { @apply bg-verde border-verde text-paper font-medium hover:bg-verde-deep hover:border-verde-deep; }
+  .btn-danger  { @apply border-red-400/40 text-danger bg-red-500/5 hover:bg-red-500/10 hover:border-danger; }
+  .btn-sm      { @apply px-3 py-1.5 text-xs rounded; }
+  .input       { @apply w-full px-3 py-2.5 border border-ink/20 rounded-md text-sm font-body bg-white text-ink focus:outline-none focus:border-verde transition-colors; }
+  .label       { @apply block text-xs font-medium text-ink-soft uppercase tracking-wider mb-1.5; }
+  .pill        { @apply inline-flex items-center gap-1.5 px-3 py-1.5 border border-wire rounded-full text-xs text-pencil-navy bg-wire-soft; }
+  .stat-label  { @apply text-xs uppercase tracking-wider text-ink-soft mb-2; }
+  .stat-value  { @apply font-mono text-2xl font-semibold tracking-tight; }
+  .stat-delta  { @apply text-xs mt-1.5 text-ink-soft; }
+  .badge       { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium; }
+  .badge-green { @apply bg-verde/10 text-verde-deep; }
+  .badge-amber { @apply bg-amber/10 text-amber; }
+  .badge-red   { @apply bg-danger/10 text-danger; }
+  .badge-gray  { @apply bg-ink/8 text-ink-soft; }
+  .nav-item    { @apply flex items-center gap-2.5 px-3 py-2.5 rounded-md text-pencil-navy text-sm cursor-pointer transition-all hover:bg-wire-soft hover:text-paper w-full border-none bg-transparent text-left; }
+  .nav-active  { @apply bg-wire-soft text-paper shadow-[inset_2px_0_0_#C97A2B]; }
+  .section-head { @apply flex items-baseline justify-between mb-4 mt-7; }
+  .ledger-row  { @apply flex items-center gap-3 py-3 border-b border-ink/8 last:border-0; }
+  .ledger-icon { @apply w-9 h-9 rounded-lg bg-verde-tint text-verde-deep flex items-center justify-center shrink-0; }
+  .ledger-icon.amber { @apply bg-amber-tint text-amber; }
+  .form-error  { @apply bg-danger/8 border border-danger/25 rounded-lg text-danger text-xs p-3 mb-3; }
+  .form-success { @apply bg-verde/10 border border-verde/25 rounded-lg text-verde-deep text-xs p-3 mb-3; }
+  .switch      { @apply relative w-9 h-5 rounded-full bg-ink/15 cursor-pointer transition-colors shrink-0; }
+  .switch-on   { @apply bg-verde; }
+}
+
+@layer utilities {
+  .font-display { font-family: 'Fraunces', serif; }
+  .font-mono    { font-family: 'IBM Plex Mono', monospace; }
+  .font-body    { font-family: 'IBM Plex Sans', sans-serif; }
+  .shadow-card  { box-shadow: 0 1px 0 rgba(14,28,41,.02), 0 8px 24px -12px rgba(10,20,30,.35); }
+  .shadow-lift  { box-shadow: 0 12px 32px -14px rgba(10,20,30,.5); }
+  .text-pos     { @apply text-verde-deep; }
+  .text-neg     { @apply text-ink; }
+}
