@@ -1,0 +1,335 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ExpenseAI — Sign In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+:root{
+  --ink-navy:#0E1C29;--ink-navy-deep:#0A141E;--wire:#21384E;--wire-soft:#1A2E40;
+  --paper:#F6F1E4;--paper-dim:#ECE5D2;--ink:#1A2421;--ink-soft:#4A5350;
+  --verdigris:#3C7A6A;--verdigris-deep:#2C5C50;--verdigris-tint:#E4EFEA;
+  --amber:#C97A2B;--amber-tint:#F7E9D8;--pencil:#8FA39C;--pencil-on-navy:#7E97A6;--danger:#A8432F;
+  --font-display:"Fraunces","Iowan Old Style",serif;
+  --font-body:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,monospace;
+}
+body{
+  background:var(--ink-navy);font-family:var(--font-body);font-size:14px;
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background-image:radial-gradient(1000px 600px at 80% -10%,rgba(60,122,106,0.12),transparent 60%),
+    radial-gradient(800px 500px at 10% 110%,rgba(201,122,43,0.07),transparent 60%);
+}
+.login-wrap{width:100%;max-width:440px;padding:20px}
+.login-brand{display:flex;align-items:center;gap:12px;margin-bottom:36px;justify-content:center}
+.login-brand-mark{
+  width:38px;height:38px;border-radius:50%;border:1.5px solid var(--verdigris);
+  display:flex;align-items:center;justify-content:center;color:var(--verdigris);
+  transform:rotate(-6deg);flex-shrink:0
+}
+.login-brand-mark svg{width:18px;height:18px}
+.login-brand-text{display:flex;flex-direction:column;line-height:1.2}
+.login-brand-name{font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--paper)}
+.login-brand-sub{font-size:11px;color:var(--pencil-on-navy);letter-spacing:0.06em;text-transform:uppercase}
+.login-card{
+  background:var(--paper);border-radius:6px;padding:32px;
+  box-shadow:0 2px 0 rgba(14,28,41,0.04),0 20px 48px -16px rgba(10,20,30,0.5)
+}
+.login-title{font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.login-sub{font-size:13px;color:var(--ink-soft);margin-bottom:28px}
+.tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:2px solid rgba(26,36,33,0.1)}
+.tab{
+  padding:8px 20px;font-size:13.5px;font-weight:500;cursor:pointer;border:none;
+  background:none;color:var(--ink-soft);border-bottom:2px solid transparent;margin-bottom:-2px;
+  font-family:inherit;transition:color 0.15s,border-color 0.15s
+}
+.tab.active{color:var(--verdigris-deep);border-bottom-color:var(--verdigris)}
+.form-row{margin-bottom:16px}
+.form-label{display:block;font-size:11.5px;font-weight:500;color:var(--ink-soft);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.04em}
+.form-input{
+  width:100%;padding:10px 13px;border:1.5px solid rgba(26,36,33,0.15);border-radius:7px;
+  font-size:14px;font-family:inherit;background:#fff;color:var(--ink);transition:border-color 0.15s
+}
+.form-input:focus{outline:none;border-color:var(--verdigris)}
+.form-input-wrap{position:relative}
+.form-input-wrap .form-input{padding-right:42px}
+.toggle-pw{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;color:var(--ink-soft);padding:2px
+}
+.btn-block{
+  width:100%;padding:11px;border:none;border-radius:7px;font-size:14px;font-weight:600;
+  font-family:inherit;cursor:pointer;background:var(--verdigris);color:var(--paper);
+  transition:background 0.15s,transform 0.1s;margin-top:4px
+}
+.btn-block:hover{background:var(--verdigris-deep)}
+.btn-block:active{transform:translateY(1px)}
+.btn-block:disabled{opacity:0.6;cursor:not-allowed}
+.divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--ink-soft);font-size:12px}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:rgba(26,36,33,0.1)}
+.social-row{display:flex;gap:10px}
+.btn-social{
+  flex:1;padding:9px;border:1.5px solid rgba(26,36,33,0.15);border-radius:7px;
+  background:#fff;cursor:pointer;font-size:13px;font-family:inherit;color:var(--ink-soft);
+  display:flex;align-items:center;justify-content:center;gap:8px;transition:border-color 0.15s
+}
+.btn-social:hover{border-color:var(--verdigris)}
+.form-error{
+  background:rgba(168,67,47,0.09);border:1px solid rgba(168,67,47,0.25);border-radius:6px;
+  color:var(--danger);font-size:12.5px;padding:9px 12px;margin-bottom:14px
+}
+.form-success{
+  background:rgba(60,122,106,0.1);border:1px solid rgba(60,122,106,0.25);border-radius:6px;
+  color:var(--verdigris-deep);font-size:12.5px;padding:9px 12px;margin-bottom:14px
+}
+.login-footer{text-align:center;margin-top:20px;font-size:12px;color:var(--pencil-on-navy)}
+.login-footer a{color:var(--amber);text-decoration:none}
+.forgot-link{text-align:right;margin-top:-10px;margin-bottom:16px}
+.forgot-link a{font-size:12px;color:var(--verdigris-deep);text-decoration:none}
+.forgot-link a:hover{text-decoration:underline}
+.password-strength{margin-top:6px;display:flex;gap:4px}
+.ps-bar{height:3px;flex:1;border-radius:2px;background:rgba(26,36,33,0.1);transition:background 0.3s}
+.ps-bar.weak{background:var(--danger)}
+.ps-bar.fair{background:var(--amber)}
+.ps-bar.good{background:var(--verdigris)}
+.ps-label{font-size:11px;color:var(--ink-soft);margin-top:4px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="login-wrap">
+  <div class="login-brand">
+    <div class="login-brand-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v4H4zM4 10h10v4H4zM4 16h16v4H4z"/></svg>
+    </div>
+    <div class="login-brand-text">
+      <span class="login-brand-name">ExpenseAI</span>
+      <span class="login-brand-sub">Ledger Console</span>
+    </div>
+  </div>
+
+  <div class="login-card">
+    <div class="tabs">
+      <button class="tab active" id="tab-signin" onclick="switchTab('signin')">Sign in</button>
+      <button class="tab" id="tab-signup" onclick="switchTab('signup')">Create account</button>
+    </div>
+
+    <!-- SIGN IN FORM -->
+    <div id="pane-signin">
+      <div id="signin-error" class="form-error" hidden></div>
+      <div id="signin-success" class="form-success" hidden></div>
+      <form id="form-signin" onsubmit="handleSignin(event)">
+        <div class="form-row">
+          <label class="form-label">Mobile / Email</label>
+          <input class="form-input" id="si-email" type="text" placeholder="9876543210 or name@email.com" required autocomplete="username"/>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Password</label>
+          <div class="form-input-wrap">
+            <input class="form-input" id="si-password" type="password" placeholder="Enter your password" required autocomplete="current-password"/>
+            <button type="button" class="toggle-pw" onclick="togglePw('si-password',this)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="forgot-link"><a href="#" onclick="showForgot(event)">Forgot password?</a></div>
+        <button type="submit" class="btn-block" id="btn-signin">Sign in to ExpenseAI</button>
+      </form>
+      <div class="divider">or continue with</div>
+      <div class="social-row">
+        <button class="btn-social" onclick="socialLogin('Google')">
+          <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Google
+        </button>
+        <button class="btn-social" onclick="socialLogin('GitHub')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--ink)"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg>
+          GitHub
+        </button>
+      </div>
+    </div>
+
+    <!-- SIGN UP FORM -->
+    <div id="pane-signup" hidden>
+      <div id="signup-error" class="form-error" hidden></div>
+      <form id="form-signup" onsubmit="handleSignup(event)">
+        <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div>
+            <label class="form-label">First Name *</label>
+            <input class="form-input" id="su-first" type="text" placeholder="Arjun" required/>
+          </div>
+          <div>
+            <label class="form-label">Last Name</label>
+            <input class="form-input" id="su-last" type="text" placeholder="Sharma"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Mobile Number *</label>
+          <div class="form-input-wrap" style="display:flex;gap:0">
+            <span style="padding:10px 12px;background:#f5f5f5;border:1.5px solid rgba(26,36,33,0.15);border-right:none;border-radius:7px 0 0 7px;font-size:14px;color:var(--ink-soft);white-space:nowrap">+91</span>
+            <input class="form-input" id="su-mobile" type="tel" placeholder="9876543210" maxlength="10" style="border-radius:0 7px 7px 0" required/>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Email Address *</label>
+          <input class="form-input" id="su-email" type="email" placeholder="arjun@gmail.com" required/>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Password *</label>
+          <div class="form-input-wrap">
+            <input class="form-input" id="su-password" type="password" placeholder="Min 8 characters" required oninput="checkStrength(this.value)"/>
+            <button type="button" class="toggle-pw" onclick="togglePw('su-password',this)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <div class="password-strength" id="pw-strength-bars">
+            <div class="ps-bar" id="ps-1"></div><div class="ps-bar" id="ps-2"></div><div class="ps-bar" id="ps-3"></div><div class="ps-bar" id="ps-4"></div>
+          </div>
+          <div class="ps-label" id="pw-strength-label"></div>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Confirm Password *</label>
+          <input class="form-input" id="su-confirm" type="password" placeholder="Repeat password" required/>
+        </div>
+        <button type="submit" class="btn-block" id="btn-signup">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="login-footer">
+    ExpenseAI &copy; 2026 &nbsp;|&nbsp; <a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms</a>
+  </div>
+</div>
+
+<script>
+// Demo credentials
+const DEMO_USER = { email: 'demo@expenseai.in', mobile: '9876543210', password: 'Demo@1234', name: 'Arjun Sharma' };
+
+function switchTab(tab) {
+  document.getElementById('pane-signin').hidden = tab !== 'signin';
+  document.getElementById('pane-signup').hidden = tab !== 'signup';
+  document.getElementById('tab-signin').classList.toggle('active', tab === 'signin');
+  document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
+}
+
+function togglePw(id, btn) {
+  const inp = document.getElementById(id);
+  const show = inp.type === 'password';
+  inp.type = show ? 'text' : 'password';
+  btn.innerHTML = show
+    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+    : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+}
+
+function checkStrength(pw) {
+  let score = 0;
+  if (pw.length >= 8) score++;
+  if (/[A-Z]/.test(pw)) score++;
+  if (/[0-9]/.test(pw)) score++;
+  if (/[^A-Za-z0-9]/.test(pw)) score++;
+  const labels = ['', 'Weak', 'Fair', 'Good', 'Strong'];
+  const cls    = ['', 'weak', 'fair', 'good', 'good'];
+  for (let i = 1; i <= 4; i++) {
+    const bar = document.getElementById('ps-' + i);
+    bar.className = 'ps-bar' + (i <= score ? ' ' + cls[score] : '');
+  }
+  document.getElementById('pw-strength-label').textContent = pw.length ? labels[score] : '';
+}
+
+function handleSignin(e) {
+  e.preventDefault();
+  const errEl = document.getElementById('signin-error');
+  const sucEl = document.getElementById('signin-success');
+  errEl.hidden = true; sucEl.hidden = true;
+  const id  = document.getElementById('si-email').value.trim();
+  const pw  = document.getElementById('si-password').value;
+  const btn = document.getElementById('btn-signin');
+  btn.disabled = true; btn.textContent = 'Signing in...';
+  setTimeout(function() {
+    // Check demo credentials OR any previously registered user
+    const storedUsers = JSON.parse(localStorage.getItem('expenseai_users') || '[]');
+    const matchedUser = storedUsers.find(function(u) {
+      return (u.email === id || u.mobile === id) && u.password === pw;
+    });
+    const isDemoLogin = (id === DEMO_USER.email || id === DEMO_USER.mobile) && pw === DEMO_USER.password;
+
+    if (isDemoLogin || matchedUser) {
+      // Build user session from whichever matched
+      let user;
+      if (matchedUser) {
+        user = { name: matchedUser.name, email: matchedUser.email, mobile: matchedUser.mobile };
+      } else {
+        user = { name: DEMO_USER.name, email: DEMO_USER.email, mobile: DEMO_USER.mobile };
+      }
+      // Save current session
+      localStorage.setItem('expenseai_user', JSON.stringify(user));
+      sucEl.textContent = 'Welcome back, ' + user.name + '! Redirecting...';
+      sucEl.hidden = false;
+      setTimeout(function() { window.location.href = 'index.html'; }, 900);
+    } else {
+      errEl.textContent = 'Invalid credentials. Try demo@expenseai.in / Demo@1234';
+      errEl.hidden = false;
+      btn.disabled = false; btn.textContent = 'Sign in to ExpenseAI';
+    }
+  }, 800);
+}
+
+function handleSignup(e) {
+  e.preventDefault();
+  const errEl = document.getElementById('signup-error');
+  errEl.hidden = true;
+  const first  = document.getElementById('su-first').value.trim();
+  const last   = document.getElementById('su-last').value.trim();
+  const mobile = document.getElementById('su-mobile').value.trim();
+  const email  = document.getElementById('su-email').value.trim();
+  const pw     = document.getElementById('su-password').value;
+  const cpw    = document.getElementById('su-confirm').value;
+
+  if (!first) { errEl.textContent = 'First name is required.'; errEl.hidden = false; return; }
+  if (pw !== cpw) { errEl.textContent = 'Passwords do not match.'; errEl.hidden = false; return; }
+  if (pw.length < 8) { errEl.textContent = 'Password must be at least 8 characters.'; errEl.hidden = false; return; }
+  if (!/^\d{10}$/.test(mobile)) { errEl.textContent = 'Enter a valid 10-digit mobile number.'; errEl.hidden = false; return; }
+  if (!email) { errEl.textContent = 'Email address is required.'; errEl.hidden = false; return; }
+
+  const fullName = last ? first + ' ' + last : first;
+  const user = { name: fullName, email: email, mobile: mobile, password: pw };
+
+  // Save to users list (for future sign-in)
+  const storedUsers = JSON.parse(localStorage.getItem('expenseai_users') || '[]');
+  // Remove any existing entry with same email/mobile
+  const filtered = storedUsers.filter(function(u) { return u.email !== email && u.mobile !== mobile; });
+  filtered.push(user);
+  localStorage.setItem('expenseai_users', JSON.stringify(filtered));
+
+  // Save current session (without password)
+  localStorage.setItem('expenseai_user', JSON.stringify({ name: fullName, email: email, mobile: mobile }));
+
+  const btn = document.getElementById('btn-signup');
+  btn.disabled = true; btn.textContent = 'Creating account...';
+  setTimeout(function() {
+    window.location.href = 'index.html';
+  }, 900);
+}
+
+function showForgot(e) {
+  e.preventDefault();
+  const errEl = document.getElementById('signin-error');
+  errEl.hidden = true;
+  document.getElementById('signin-success').textContent = 'Password reset link sent to your registered email/mobile.';
+  document.getElementById('signin-success').hidden = false;
+}
+
+function socialLogin(provider) {
+  const btn = event.currentTarget;
+  btn.disabled = true; btn.textContent = 'Connecting...';
+  // Save a session for the social login user
+  const user = { name: 'Guest User', email: 'guest@' + provider.toLowerCase() + '.com', mobile: '' };
+  localStorage.setItem('expenseai_user', JSON.stringify(user));
+  setTimeout(function() { window.location.href = 'index.html'; }, 700);
+}
+</script>
+</body>
+</html>

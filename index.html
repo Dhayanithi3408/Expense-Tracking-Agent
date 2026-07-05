@@ -1,0 +1,894 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ExpenseAI â€” Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ============================= SIDEBAR (shared across all screens) ============================= -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v4H4zM4 10h10v4H4zM4 16h16v4H4z"/></svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">ExpenseAI</span>
+        <span class="brand-sub">Ledger Console</span>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-group-label">Workspace</div>
+      <button class="nav-item active" data-screen="overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        <span>Overview</span>
+      </button>
+      <button class="nav-item" data-screen="sources">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M8.2 7.2 15.8 11M8.2 16.8 15.8 13"/></svg>
+        <span>Sources &amp; Ingestion</span>
+      </button>
+      <button class="nav-item" data-screen="transactions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3v18M4 8h4M4 16h4"/><circle cx="16" cy="12" r="6"/><path d="M16 9.5v2.5l1.6 1.6"/></svg>
+        <span>Transactions &amp; AI</span>
+      </button>
+      <button class="nav-item" data-screen="chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a8 8 0 1 1-3.2-6.4"/><path d="M21 3v6h-6"/><circle cx="9" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="13" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg>
+        <span>Ask ExpenseAI</span>
+      </button>
+      <button class="nav-item" data-screen="insights">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V9M11 19V4M18 19v-7"/></svg>
+        <span>Insights &amp; Forecast</span>
+      </button>
+
+      <div class="nav-group-label">Payments</div>
+      <button class="nav-item" data-screen="accounts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M4 10h16M12 3 3 8h18ZM6 10v8M12 10v8M18 10v8"/></svg>
+        <span>Bank Accounts</span>
+      </button>
+      <button class="nav-item" data-screen="payments">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg>
+        <span>Online Transactions</span>
+      </button>
+
+      <div class="nav-group-label">Configure</div>
+      <button class="nav-item" data-screen="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1z"/></svg>
+        <span>Settings &amp; Audit</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="user-avatar" id="sidebar-avatar">?</div>
+      <div class="user-info">
+        <div class="user-name" id="sidebar-name">Loading…</div>
+        <div class="user-email" id="sidebar-email"></div>
+      </div>
+      <button class="logout-btn" onclick="logoutUser()" title="Sign out">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ============================= MAIN ============================= -->
+  <main class="main">
+
+    <!-- ---------- OVERVIEW ---------- -->
+    <section class="screen" id="screen-overview">
+      <div class="topbar">
+        <div>
+          <div class="topbar-kicker">This month Â· Jul 2026</div>
+          <div class="topbar-title" data-greeting>Namaste. Here's your ledger.</div>
+        </div>
+        <div class="topbar-right">
+          <span class="pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 1 1-3.2-6.4"/><path d="M21 3v6h-6"/></svg>
+            Synced 2m ago
+          </span>
+          <button class="btn btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            Log expense
+          </button>
+        </div>
+      </div>
+
+      <div class="screen" style="padding-top:18px;">
+        <div class="grid grid-4">
+          <div class="card">
+            <div class="stat-label">Spent this month</div><div class="stat-value">Rs 2,37,250</div>
+            <div class="stat-delta up">â†‘ 12% vs June</div>
+          </div>
+          <div class="card">
+            <div class="stat-label">Budget remaining</div><div class="stat-value">Rs 62,750</div>
+            <div class="progress-track" style="margin-top:10px;"><div class="progress-fill" style="width:81%"></div></div>
+          </div>
+          <div class="card">
+            <div class="stat-label">Flagged anomalies</div>
+            <div class="stat-value" style="color:var(--amber)">3</div>
+            <div class="stat-delta">2 need review</div>
+          </div>
+          <div class="card">
+            <div class="stat-label">Auto-categorized</div>
+            <div class="stat-value">96%</div>
+            <div class="stat-delta down">â†‘ 4pt this month</div>
+          </div>
+        </div>
+
+        <div class="grid grid-split" style="margin-top:14px; align-items:start;">
+          <div class="card">
+            <div class="divider-label">Recent ledger activity</div>
+            <div class="ledger" id="overview-ledger"></div>
+          </div>
+
+          <div class="card-navy">
+            <div class="divider-label" style="color:var(--pencil-on-navy)">Ask ExpenseAI</div>
+            <div style="font-family:var(--font-mono); font-size:13px; color:var(--paper); background:rgba(255,255,255,0.04); border:1px solid var(--wire); border-radius:8px; padding:12px; margin-bottom:10px;">
+              "How much did I spend on food delivery this week compared to last?"
+            </div>
+            <div style="font-size:12.5px; color:var(--pencil-on-navy); line-height:1.6;">
+              You spent <b style="color:var(--paper)">Rs 5,100 on food delivery this week, down 18% from last week's Rs 6,240. Nice â€” that's back under your weekly target.
+            </div>
+            <button class="btn" style="width:100%; justify-content:center; margin-top:12px;" onclick="goTo('chat')">Open full chat â†’</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- SOURCES & INGESTION (extended vision: feature 1) ---------- -->
+    <section class="screen" id="screen-sources" hidden>
+      <div class="topbar">
+        <div>
+          <div class="topbar-kicker">Extended vision Â· Feature 01</div>
+          <div class="topbar-title">Sources &amp; Ingestion</div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            Connect a source
+          </button>
+        </div>
+      </div>
+
+      <div class="screen" style="padding-top:18px;">
+        <p style="max-width:640px; color:var(--pencil-on-navy); font-size:13px; margin-top:0;">
+          Today the agent only listens on Telegram. Here's the extended vision: every account feeds one cleaning
+          pipeline, so a receipt in your inbox and a card swipe land in the same ledger, deduplicated and normalized,
+          before the AI ever sees them.
+        </p>
+
+        <div class="section-head" style="margin-top:8px;">
+          <h2>Cleaning pipeline â€” last 24h</h2>
+          <span class="hint">1,204 raw events in</span>
+        </div>
+        <div class="card">
+          <div class="pipeline">
+            <div class="pipe-step">
+              <div class="pipe-count">1,204</div>
+              <div class="pipe-label">Raw ingested</div>
+              <div class="pipe-note">4 sources</div>
+            </div>
+            <div class="pipe-step">
+              <div class="pipe-count">1,158</div>
+              <div class="pipe-label">Parsed</div>
+              <div class="pipe-note">46 unparseable â†’ queued</div>
+            </div>
+            <div class="pipe-step">
+              <div class="pipe-count">1,091</div>
+              <div class="pipe-label">Deduplicated</div>
+              <div class="pipe-note">67 duplicates merged</div>
+            </div>
+            <div class="pipe-step">
+              <div class="pipe-count">1,091</div>
+              <div class="pipe-label">Currency normalized</div>
+              <div class="pipe-note">3 currencies â†’ USD</div>
+            </div>
+            <div class="pipe-step">
+              <div class="pipe-count">1,091</div>
+              <div class="pipe-label">Logged to ledger</div>
+              <div class="pipe-note" style="color:var(--verdigris-deep)">100% written to sheet</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <h2>Connected sources</h2>
+          <span class="hint">4 connected Â· 1 available</span>
+        </div>
+        <div class="card">
+          <div id="sources-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- TRANSACTIONS & AI (extended vision: feature 2) ---------- -->
+    <section class="screen" id="screen-transactions" hidden>
+      <div class="topbar">
+        <div>
+          <div class="topbar-kicker">Extended vision Â· Feature 02</div>
+          <div class="topbar-title">Transactions &amp; Categorization</div>
+        </div>
+        <div class="topbar-right">
+          <span class="pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2.5"/></svg>
+            Model: expense-categorizer v3
+          </span>
+        </div>
+      </div>
+
+      <div class="screen" style="padding-top:18px;">
+        <p style="max-width:660px; color:var(--pencil-on-navy); font-size:13px; margin-top:0;">
+          Every transaction gets stamped, not just labeled â€” a category, a confidence score, and where relevant, an
+          anomaly signal, so you can see exactly how much to trust the AI's read before it hits the sheet.
+        </p>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <div class="stat-label">High confidence (&gt;90%)</div>
+            <div class="stat-value">842</div>
+          </div>
+          <div class="card">
+            <div class="stat-label">Needs your confirmation</div>
+            <div class="stat-value" style="color:var(--amber)">37</div>
+          </div>
+          <div class="card">
+            <div class="stat-label">Active anomaly rules</div>
+            <div class="stat-value">6</div>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <h2>Ledger â€” stamped by the agent</h2>
+          <span class="hint">Showing anomalies first</span>
+        </div>
+        <div class="card">
+          <div class="ledger" id="tx-ledger"></div>
+        </div>
+
+        <div class="section-head">
+          <h2>Anomaly detection rules</h2>
+          <span class="hint">extended coverage</span>
+        </div>
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="ledger-title">Spend spike</div>
+            <div class="ledger-sub">Flags a category when spend exceeds 2.5Ã— its 8-week average.</div>
+          </div>
+          <div class="card">
+            <div class="ledger-title">Duplicate charge</div>
+            <div class="ledger-sub">Same merchant + amount within 48h across any two sources.</div>
+          </div>
+          <div class="card">
+            <div class="ledger-title">Subscription creep</div>
+            <div class="ledger-sub">Recurring charge that increased 3 months running.</div>
+          </div>
+          <div class="card">
+            <div class="ledger-title">New merchant, high amount</div>
+            <div class="ledger-sub">First-time merchant above your 90th percentile transaction size.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- ASK EXPENSEAI (chat) ---------- -->
+    <section class="screen" id="screen-chat" hidden>
+      <div class="topbar">
+        <div>
+          <div class="topbar-kicker">Natural language</div>
+          <div class="topbar-title">Ask ExpenseAI</div>
+        </div>
+        <div class="topbar-right">
+          <span class="pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg>
+            Same agent as Telegram
+          </span>
+        </div>
+      </div>
+
+      <div class="screen" style="padding-top:18px; max-width:760px;">
+        <div class="card">
+          <div class="chat-shell">
+            <div class="chat-scroll" id="chat-scroll"></div>
+            <div>
+              <div class="chat-suggest">
+                <button class="chip" onclick="askSample('How much did I spend on subscriptions this month?')">Subscriptions this month?</button>
+                <button class="chip" onclick="askSample('Any unusual charges recently?')">Unusual charges?</button>
+                <button class="chip" onclick="askSample('Forecast my spend for August')">Forecast August</button>
+              </div>
+              <div class="chat-input-row">
+                <input class="chat-input" id="chat-input" type="text" placeholder="Ask about your spendingâ€¦" />
+                <button class="btn btn-primary" onclick="sendChat()">Send</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- INSIGHTS & FORECAST ---------- -->
+    <section class="screen" id="screen-insights" hidden>
+      <div class="topbar">
+        <div>
+          <div class="topbar-kicker">Trends</div>
+          <div class="topbar-title">Insights &amp; Forecast</div>
+        </div>
+      </div>
+
+      <div class="screen" style="padding-top:18px;">
+        <div class="grid grid-split">
+          <div class="card">
+            <div class="divider-label">Spend vs. forecast (6 months)</div>
+            <canvas id="forecastChart" height="130"></canvas>
+            <div class="legend">
+              <span class="legend-item"><span class="legend-swatch" style="background:#3C7A6A"></span>Actual</span>
+              <span class="legend-item"><span class="legend-swatch" style="background:#C97A2B"></span>Forecast</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="divider-label">By category</div>
+            <canvas id="categoryChart" height="130"></canvas>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <h2>Budget recommendations</h2>
+        </div>
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="ledger-title">Trim dining out by Rs 800/mo</div>
+            <div class="ledger-sub">You've exceeded this category 3 of the last 4 months.</div>
+          </div>
+          <div class="card">
+            <div class="ledger-title">Cancel 1 unused subscription</div>
+            <div class="ledger-sub">Streaming service unused for 47 days, Rs 149/mo.</div>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <h2>Recurring bills detected</h2>
+        </div>
+        <div class="card">
+          <div class="ledger" id="recurring-ledger"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- SETTINGS ---------- -->
+    <section class="screen" id="screen-settings" hidden>
+      <div class="topbar">
+        <div>
+          <div class="topbar-kicker">Configure</div>
+          <div class="topbar-title">Settings</div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-primary" onclick="saveSettings()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Save Changes
+          </button>
+        </div>
+      </div>
+
+      <div class="screen" style="padding-top:18px;">
+
+        <!-- Profile -->
+        <div class="section-head" style="margin-top:0;">
+          <h2>My Profile</h2>
+          <span class="hint">Account details</span>
+        </div>
+        <div class="card">
+          <div class="settings-profile-row">
+            <div class="settings-avatar" id="settings-avatar-display">?</div>
+            <div style="flex:1">
+              <div class="settings-grid">
+                <div class="form-row" style="margin-bottom:0">
+                  <label class="form-label">Full Name</label>
+                  <input class="form-input" id="set-name" placeholder="Your full name"/>
+                </div>
+                <div class="form-row" style="margin-bottom:0">
+                  <label class="form-label">Mobile Number</label>
+                  <div style="display:flex;gap:0">
+                    <span class="input-prefix">+91</span>
+                    <input class="form-input" id="set-mobile" placeholder="10-digit mobile" style="border-radius:0 6px 6px 0"/>
+                  </div>
+                </div>
+                <div class="form-row" style="margin-bottom:0">
+                  <label class="form-label">Email Address</label>
+                  <input class="form-input" id="set-email" type="email" placeholder="your@email.com"/>
+                </div>
+                <div class="form-row" style="margin-bottom:0">
+                  <label class="form-label">PAN Number</label>
+                  <input class="form-input" id="set-pan" placeholder="ABCDE1234F" maxlength="10"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preferences -->
+        <div class="section-head">
+          <h2>Preferences</h2>
+          <span class="hint">Display & regional settings</span>
+        </div>
+        <div class="card">
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Default Currency</div>
+              <div class="settings-row-sub">All amounts across the app will be shown in this currency</div>
+            </div>
+            <select class="form-input settings-select" id="set-currency" onchange="onCurrencyChange(this.value)">
+              <option value="INR" selected>INR - Indian Rupee (Rs)</option>
+              <option value="USD">USD - US Dollar ($)</option>
+              <option value="EUR">EUR - Euro (euro)</option>
+              <option value="GBP">GBP - British Pound (pound)</option>
+              <option value="AED">AED - UAE Dirham</option>
+              <option value="SGD">SGD - Singapore Dollar</option>
+              <option value="CAD">CAD - Canadian Dollar</option>
+              <option value="AUD">AUD - Australian Dollar</option>
+              <option value="JPY">JPY - Japanese Yen</option>
+              <option value="CHF">CHF - Swiss Franc</option>
+            </select>
+          </div>
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Language</div>
+              <div class="settings-row-sub">Interface language for menus and labels</div>
+            </div>
+            <select class="form-input settings-select" id="set-language">
+              <option value="en">English</option>
+              <option value="hi">Hindi (हिन्दी)</option>
+              <option value="ta">Tamil (தமிழ்)</option>
+              <option value="te">Telugu (తెలుగు)</option>
+              <option value="mr">Marathi (मराठी)</option>
+            </select>
+          </div>
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Date Format</div>
+              <div class="settings-row-sub">How dates are displayed across the ledger</div>
+            </div>
+            <select class="form-input settings-select" id="set-dateformat">
+              <option value="DD/MM/YYYY">DD/MM/YYYY (Indian standard)</option>
+              <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+              <option value="YYYY-MM-DD">YYYY-MM-DD (ISO)</option>
+            </select>
+          </div>
+          <div class="settings-row" style="border-bottom:none">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Financial Year Start</div>
+              <div class="settings-row-sub">Used for annual reports and budget resets</div>
+            </div>
+            <select class="form-input settings-select" id="set-fy">
+              <option value="april">April (Indian FY)</option>
+              <option value="january">January (Calendar year)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Notifications -->
+        <div class="section-head">
+          <h2>Notifications</h2>
+          <span class="hint">Alerts & reminders</span>
+        </div>
+        <div class="card">
+          <div class="settings-toggle-row">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Large transaction alert</div>
+              <div class="settings-row-sub">Notify when any single spend exceeds Rs 5,000</div>
+            </div>
+            <div class="switch on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-toggle-row">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Weekly spending summary</div>
+              <div class="settings-row-sub">Get a digest every Monday morning on WhatsApp / email</div>
+            </div>
+            <div class="switch on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-toggle-row">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Budget overspend warning</div>
+              <div class="settings-row-sub">Alert when you cross 80% of any category budget</div>
+            </div>
+            <div class="switch on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-toggle-row">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Suspicious activity alert</div>
+              <div class="settings-row-sub">Instant notification for flagged or duplicate transactions</div>
+            </div>
+            <div class="switch on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-toggle-row" style="border-bottom:none">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Bill due reminders</div>
+              <div class="settings-row-sub">Remind 3 days before a recurring payment is due</div>
+            </div>
+            <div class="switch" onclick="this.classList.toggle('on')"></div>
+          </div>
+        </div>
+
+        <!-- Security -->
+        <div class="section-head">
+          <h2>Security</h2>
+          <span class="hint">Password & access</span>
+        </div>
+        <div class="card">
+          <div class="settings-toggle-row">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Two-factor authentication (2FA)</div>
+              <div class="settings-row-sub">OTP on mobile +91 <span id="set-2fa-mobile">—</span> for every login</div>
+            </div>
+            <div class="switch on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-toggle-row">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Confirm before logging spend &gt; Rs 10,000</div>
+              <div class="settings-row-sub">Agent asks before writing large transactions to the ledger</div>
+            </div>
+            <div class="switch on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-toggle-row" style="border-bottom:none">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Confirm before creating a new category</div>
+              <div class="settings-row-sub">Prevents silent category sprawl in the sheet</div>
+            </div>
+            <div class="switch on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-row" style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(26,36,33,0.08);border-bottom:none">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Change Password</div>
+              <div class="settings-row-sub">Last changed 30 days ago</div>
+            </div>
+            <button class="btn btn-sm" onclick="alert('Password reset link sent to demo@expenseai.in')">Change</button>
+          </div>
+        </div>
+
+        <!-- Integrations -->
+        <div class="section-head">
+          <h2>Connected Integrations</h2>
+          <span class="hint">Linked services</span>
+        </div>
+        <div class="card">
+          <div id="integrations-list"></div>
+        </div>
+
+        <!-- Budget limits -->
+        <div class="section-head">
+          <h2>Monthly Budget Limits</h2>
+          <span class="hint">Set per-category caps</span>
+        </div>
+        <div class="card">
+          <div class="settings-budget-grid">
+            <div class="budget-item">
+              <label class="form-label">Food & Dining</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="input-prefix" style="border-radius:6px 0 0 6px">Rs</span>
+                <input class="form-input" style="border-radius:0 6px 6px 0" value="8000" type="number"/>
+              </div>
+            </div>
+            <div class="budget-item">
+              <label class="form-label">Transport</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="input-prefix" style="border-radius:6px 0 0 6px">Rs</span>
+                <input class="form-input" style="border-radius:0 6px 6px 0" value="3000" type="number"/>
+              </div>
+            </div>
+            <div class="budget-item">
+              <label class="form-label">Shopping</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="input-prefix" style="border-radius:6px 0 0 6px">Rs</span>
+                <input class="form-input" style="border-radius:0 6px 6px 0" value="5000" type="number"/>
+              </div>
+            </div>
+            <div class="budget-item">
+              <label class="form-label">Subscriptions</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="input-prefix" style="border-radius:6px 0 0 6px">Rs</span>
+                <input class="form-input" style="border-radius:0 6px 6px 0" value="1500" type="number"/>
+              </div>
+            </div>
+            <div class="budget-item">
+              <label class="form-label">Health</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="input-prefix" style="border-radius:6px 0 0 6px">Rs</span>
+                <input class="form-input" style="border-radius:0 6px 6px 0" value="2000" type="number"/>
+              </div>
+            </div>
+            <div class="budget-item">
+              <label class="form-label">Entertainment</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="input-prefix" style="border-radius:6px 0 0 6px">Rs</span>
+                <input class="form-input" style="border-radius:0 6px 6px 0" value="2500" type="number"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data & Privacy -->
+        <div class="section-head">
+          <h2>Data &amp; Privacy</h2>
+          <span class="hint">Export and manage your data</span>
+        </div>
+        <div class="card">
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Export ledger as CSV</div>
+              <div class="settings-row-sub">Download all transactions in spreadsheet format</div>
+            </div>
+            <button class="btn btn-sm" onclick="alert('Ledger CSV download will begin shortly.')">Export CSV</button>
+          </div>
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <div class="settings-row-title">Export as PDF report</div>
+              <div class="settings-row-sub">Monthly financial summary — July 2026</div>
+            </div>
+            <button class="btn btn-sm" onclick="alert('PDF report generation started.')">Export PDF</button>
+          </div>
+          <div class="settings-row" style="border-bottom:none">
+            <div class="settings-row-info">
+              <div class="settings-row-title" style="color:var(--danger)">Delete Account</div>
+              <div class="settings-row-sub">Permanently remove all your data from ExpenseAI</div>
+            </div>
+            <button class="btn btn-sm btn-danger" onclick="if(confirm('This will permanently delete your account. Are you sure?')) alert('Request submitted. You will receive a confirmation email.')">Delete</button>
+          </div>
+        </div>
+
+        <!-- Audit Log -->
+        <div class="section-head">
+          <h2>Audit Log</h2>
+          <span class="hint">Recent agent activity</span>
+        </div>
+        <div class="card">
+          <div id="audit-list"></div>
+        </div>
+
+      </div>
+    </section>
+    </section>
+
+    <!-- ========== BANK ACCOUNTS ========== -->
+    <section class="screen" id="screen-accounts" hidden>
+      <div class="topbar">
+        <div>
+          <div class="topbar-kicker">Payment Tracking Â· Feature 03</div>
+          <div class="topbar-title">Bank Accounts</div>
+        </div>
+        <div class="topbar-right">
+          <span class="pill" id="accounts-sync-pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 1 1-3.2-6.4"/><path d="M21 3v6h-6"/></svg>
+            Loadingâ€¦
+          </span>
+          <div class="currency-wrap">
+            <svg class="currency-globe" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+            <select class="currency-picker pill-select" onchange="onCurrencyChange(this.value)"></select>
+          </div>
+                    <button class="btn btn-primary" onclick="openAddAccountModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            Add Account
+          </button>
+        </div>
+      </div>
+
+      <div class="screen" style="padding-top:18px;">
+        <!-- Stats row -->
+        <div class="grid grid-4" id="accounts-stats">
+          <div class="card"><div class="stat-label">Total Balance</div><div class="stat-value" id="stat-total-balance">â€”</div><div class="stat-delta">across active accounts</div></div>
+          <div class="card"><div class="stat-label">Active Accounts</div><div class="stat-value" id="stat-active-accounts">â€”</div><div class="stat-delta">connected</div></div>
+          <div class="card"><div class="stat-label">Pending Transactions</div><div class="stat-value" style="color:var(--amber)" id="stat-pending">â€”</div><div class="stat-delta">awaiting clearance</div></div>
+          <div class="card"><div class="stat-label">Flagged Items</div><div class="stat-value" style="color:var(--danger)" id="stat-flagged">â€”</div><div class="stat-delta">need review</div></div>
+        </div>
+
+        <div class="section-head" style="margin-top:24px;">
+          <h2>Connected accounts</h2>
+          <span class="hint" id="accounts-count-hint">loadingâ€¦</span>
+        </div>
+
+        <div id="accounts-list" style="display:flex;flex-direction:column;gap:14px;"></div>
+      </div>
+    </section>
+
+    <!-- ========== ONLINE TRANSACTIONS ========== -->
+    <section class="screen" id="screen-payments" hidden>
+      <div class="topbar">
+        <div>
+          <div class="topbar-kicker">Payment Tracking Â· Feature 04</div>
+          <div class="topbar-title">Online Transactions</div>
+        </div>
+        <div class="topbar-right">
+          <div class="currency-wrap">
+            <svg class="currency-globe" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+            <select class="currency-picker pill-select" onchange="onCurrencyChange(this.value)"></select>
+          </div>
+                    <select class="pill-select" id="txn-filter-account" onchange="loadTransactions()">
+            <option value="">All accounts</option>
+          </select>
+          <select class="pill-select" id="txn-filter-status" onchange="loadTransactions()">
+            <option value="">All statuses</option>
+            <option value="cleared">Cleared</option>
+            <option value="pending">Pending</option>
+            <option value="failed">Failed</option>
+          </select>
+          <button class="btn btn-primary" onclick="openAddTxnModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            Add Transaction
+          </button>
+        </div>
+      </div>
+
+      <div class="screen" style="padding-top:18px;">
+        <div class="grid grid-4" style="margin-bottom:20px;">
+          <div class="card"><div class="stat-label">This Month Spend</div><div class="stat-value" id="stat-month-spend">â€”</div><div class="stat-delta up" id="stat-month-spend-delta">Jul 2026</div></div>
+          <div class="card"><div class="stat-label">This Month Income</div><div class="stat-value" style="color:var(--verdigris-deep)" id="stat-month-income">â€”</div><div class="stat-delta">received</div></div>
+          <div class="card"><div class="stat-label">Failed Transactions</div><div class="stat-value" style="color:var(--danger)" id="stat-failed">â€”</div><div class="stat-delta">this month</div></div>
+          <div class="card"><div class="stat-label">Flagged</div><div class="stat-value" style="color:var(--amber)" id="stat-flagged-txn">â€”</div><div class="stat-delta">suspicious activity</div></div>
+        </div>
+
+        <div class="card" style="margin-bottom:20px;">
+          <div class="divider-label">Monthly spend volume (last 6 months)</div>
+          <canvas id="paymentVolumeChart" height="80"></canvas>
+        </div>
+
+        <div class="section-head">
+          <h2>Transaction ledger</h2>
+          <span class="hint" id="txn-count-hint">loadingâ€¦</span>
+        </div>
+        <div class="card">
+          <div class="ledger" id="txn-ledger"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ========== ADD ACCOUNT MODAL ========== -->
+<div class="modal-overlay" id="modal-add-account" hidden onclick="closeModal('modal-add-account')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <span class="modal-title">Add Bank Account</span>
+      <button class="modal-close" onclick="closeModal('modal-add-account')">âœ•</button>
+    </div>
+    <form id="form-add-account" onsubmit="submitAddAccount(event)">
+      <div class="form-row">
+        <label class="form-label">Bank Name *</label>
+        <input class="form-input" name="bankName" placeholder="e.g. Chase, Ally, Wells Fargo" required />
+      </div>
+      <div class="form-row grid grid-2" style="gap:10px;">
+        <div>
+          <label class="form-label">Account Type *</label>
+          <select class="form-input" name="accountType" required>
+            <option value="">Select type</option>
+            <option value="Checking">Checking</option>
+            <option value="Savings">Savings</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Investment">Investment</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Last 4 digits *</label>
+          <input class="form-input" name="accountNumber" placeholder="e.g. â€¢â€¢4471" required />
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Account Holder Name *</label>
+        <input class="form-input" name="holderName" placeholder="Full name" required />
+      </div>
+      <div class="form-row grid grid-2" style="gap:10px;">
+        <div>
+          <label class="form-label">Current Balance</label>
+          <input class="form-input" name="balance" type="number" step="0.01" placeholder="0.00" />
+        </div>
+        <div>
+          <label class="form-label">Currency</label>
+          <select class="form-input" name="currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="INR">INR</option>
+          </select>
+        </div>
+      </div>
+      <div id="form-account-error" class="form-error" hidden></div>
+      <div class="modal-actions">
+        <button type="button" class="btn" onclick="closeModal('modal-add-account')">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="btn-add-account">Connect Account</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ========== ADD TRANSACTION MODAL ========== -->
+<div class="modal-overlay" id="modal-add-txn" hidden onclick="closeModal('modal-add-txn')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <span class="modal-title">Add Online Transaction</span>
+      <button class="modal-close" onclick="closeModal('modal-add-txn')">âœ•</button>
+    </div>
+    <form id="form-add-txn" onsubmit="submitAddTxn(event)">
+      <div class="form-row">
+        <label class="form-label">Account *</label>
+        <select class="form-input" name="accountId" id="txn-modal-account" required>
+          <option value="">Select account</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Merchant / Description *</label>
+        <input class="form-input" name="merchant" placeholder="e.g. Amazon, Netflix" required />
+      </div>
+      <div class="form-row grid grid-2" style="gap:10px;">
+        <div>
+          <label class="form-label">Amount * <span style="font-size:11px;color:var(--ink-soft)">(use â€“ for debit)</span></label>
+          <input class="form-input" name="amount" type="number" step="0.01" placeholder="-49.99" required />
+        </div>
+        <div>
+          <label class="form-label">Category</label>
+          <select class="form-input" name="category">
+            <option value="Uncategorized">Uncategorized</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Food & Drink">Food & Drink</option>
+            <option value="Transport">Transport</option>
+            <option value="Subscriptions">Subscriptions</option>
+            <option value="Housing">Housing</option>
+            <option value="Health">Health</option>
+            <option value="Income">Income</option>
+            <option value="Transfer">Transfer</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row grid grid-2" style="gap:10px;">
+        <div>
+          <label class="form-label">Method</label>
+          <select class="form-input" name="method">
+            <option value="Online">Online</option>
+            <option value="Card">Card</option>
+            <option value="Bank Transfer">Bank Transfer</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Status</label>
+          <select class="form-input" name="status">
+            <option value="pending">Pending</option>
+            <option value="cleared">Cleared</option>
+            <option value="failed">Failed</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Notes</label>
+        <input class="form-input" name="description" placeholder="Optional details" />
+      </div>
+      <div id="form-txn-error" class="form-error" hidden></div>
+      <div class="modal-actions">
+        <button type="button" class="btn" onclick="closeModal('modal-add-txn')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Transaction</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ========== TRANSACTION DETAIL MODAL ========== -->
+<div class="modal-overlay" id="modal-txn-detail" hidden onclick="closeModal('modal-txn-detail')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <span class="modal-title">Transaction Detail</span>
+      <button class="modal-close" onclick="closeModal('modal-txn-detail')">âœ•</button>
+    </div>
+    <div id="txn-detail-body"></div>
+    <div class="modal-actions" id="txn-detail-actions"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="user-loader.js"></script>
+<script src="app.js"></script>
+<script src="payments.js"></script>
+</body>
+</html>
+
+
+

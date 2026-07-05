@@ -1,22 +1,25 @@
-import axios from 'axios'
+﻿import axios from "axios";
 
-const api = axios.create({ baseURL: '/api' })
+const api = axios.create({ baseURL: "/api" });
 
 api.interceptors.request.use(cfg => {
-  const token = localStorage.getItem('eai_token')
-  if (token) cfg.headers.Authorization = `Bearer ${token}`
-  return cfg
-})
+  const token = localStorage.getItem("eai_token");
+  if (token) cfg.headers.Authorization = `Bearer ${token}`;
+  return cfg;
+});
 
 api.interceptors.response.use(
   r => r,
   err => {
-    if (err.response?.status === 401) {
-      localStorage.removeItem('eai_token')
-      window.location.href = '/login'
+    if (err.code === "ERR_NETWORK" || err.code === "ECONNREFUSED") {
+      console.error("Cannot connect to backend. Make sure server is running: cd server && npm run dev");
     }
-    return Promise.reject(err)
+    if (err.response?.status === 401) {
+      localStorage.removeItem("eai_token");
+      window.location.href = "/login";
+    }
+    return Promise.reject(err);
   }
-)
+);
 
-export default api
+export default api;

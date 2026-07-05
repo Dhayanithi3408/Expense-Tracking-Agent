@@ -1,53 +1,83 @@
-# Expense Tracking Agent — ExpenseAI
+# Expense Tracking Agent - ExpenseAI
 
-A full-stack Indian expense tracking dashboard built with **React + Tailwind CSS + Node.js + MongoDB**.
+Full-stack Indian expense tracker: **React + Tailwind CSS + Node.js + MongoDB Atlas**
 
 ## Tech Stack
 - **Frontend**: React 18, Vite, Tailwind CSS, Recharts, Lucide Icons
 - **Backend**: Node.js, Express.js
-- **Database**: MongoDB (Mongoose)
+- **Database**: MongoDB Atlas (free cloud - no local install needed)
 - **Auth**: JWT + bcryptjs
 
 ## Features
-- User registration & login (email or mobile)
-- Bank account management (add, remove, view)
-- Online transaction tracking (CRUD, flag, filter)
-- Dashboard with charts & stats
-- Multi-language support (EN, Hindi, Tamil, Telugu, Marathi, Bengali)
-- Currency switcher (INR default + 9 others)
-- Full settings (profile, preferences, notifications, security, budget limits)
+- Register / Login with email or mobile number
+- Bank account management (Add, View, Remove)
+- Online transactions (Add, Flag, Filter, Delete)
+- Dashboard with charts and stats
+- Multi-language: English, Hindi, Tamil, Telugu, Marathi, Bengali
+- Currency switcher (INR default + 9 currencies)
+- Settings: Profile, Preferences, Notifications, Security, Budget Limits
 
-## Run Locally
+---
 
-### 1. Start Backend
-```bash
+## Quick Setup
+
+### Step 1 - Get MongoDB Atlas URI (FREE)
+1. Go to https://cloud.mongodb.com and sign up free
+2. Create a free M0 cluster
+3. Click Connect, then Drivers, copy the connection string
+4. Looks like: `mongodb+srv://user:pass@cluster0.xxx.mongodb.net/expenseai`
+
+### Step 2 - Configure Backend
+```
 cd server
-npm install
-# Edit .env: set MONGO_URI to your MongoDB Atlas URI
-npm run dev
+copy .env.example .env
+```
+Edit `server/.env`:
+```
+PORT=5000
+MONGO_URI=mongodb+srv://YOUR_USER:YOUR_PASS@cluster0.xxx.mongodb.net/expenseai?retryWrites=true
+JWT_SECRET=any_random_secret
+NODE_ENV=development
 ```
 
-### 2. Start Frontend
-```bash
+### Step 3 - Install and Run
+
+Terminal 1 (Backend):
+```
+cd server
+npm install
+npm run dev
+```
+Should print: MongoDB connected + API running on http://localhost:5000
+
+Terminal 2 (Frontend):
+```
 cd client
 npm install
 npm run dev
 ```
-
 Open: http://localhost:5173
 
-**Demo credentials:** `demo@expenseai.in` / `Demo@1234`
+---
 
-## Project Structure
+## Demo
+- Email: demo@expenseai.in
+- Password: Demo@1234
+
+## API Endpoints
 ```
-├── client/          # React + Tailwind frontend
-│   └── src/
-│       ├── pages/   # Overview, Accounts, Transactions, Settings, Chat, Insights, Sources
-│       ├── components/Layout.jsx
-│       └── context/AuthContext.jsx
-├── server/          # Express + MongoDB backend
-│   ├── models/      # User, Account, Transaction
-│   ├── routes/      # auth, accounts, transactions
-│   └── middleware/  # JWT auth
-└── README.md
+POST   /api/auth/register
+POST   /api/auth/login
+GET    /api/auth/me
+PATCH  /api/auth/profile
+PATCH  /api/auth/password
+GET    /api/accounts
+POST   /api/accounts
+DELETE /api/accounts/:id
+GET    /api/transactions
+POST   /api/transactions
+PATCH  /api/transactions/:id
+DELETE /api/transactions/:id
+GET    /api/transactions/stats
+GET    /api/currencies
 ```
