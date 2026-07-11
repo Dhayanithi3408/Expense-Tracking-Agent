@@ -48,7 +48,7 @@ cd server
 npm install
 npm run dev
 ```
-Should print: MongoDB connected + API running on http://localhost:5000
+Should print: MongoDB connected + API running on https://preview-chat-0832a396-0b13-40e1-89b3-139576c6f56f.space-z.ai/
 
 Terminal 2 (Frontend):
 ```
@@ -56,7 +56,7 @@ cd client
 npm install
 npm run dev
 ```
-Open: http://localhost:5173
+Open: https://preview-chat-0832a396-0b13-40e1-89b3-139576c6f56f.space-z.ai/
 
 ---
 
